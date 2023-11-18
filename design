@@ -1,3 +1,7 @@
+MVP:
+	detect exact sentences and reply to them
+
+
 basic loop:
 	on message event
 		split into tokens
@@ -7,3 +11,12 @@ basic loop:
 		some sort of hash?
 	database
 		map of hashes to messages, metadata
+
+hash fn:
+
+
+creating database:
+	manual:
+		add an entry, requires at least 5 words???
+
+	automatic:
