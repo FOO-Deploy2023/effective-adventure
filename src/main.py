@@ -18,8 +18,17 @@ class TestClient(discord.Client):
 
 
 def is_question(question: str) -> bool:
-    indicators: List[str] = ["?", "why", "what", "who", "whose", "which",
-                             "when", "where", "how"]
+    indicators: List[str] = [
+        "?",
+        "why",
+        "what",
+        "who",
+        "whose",
+        "which",
+        "when",
+        "where",
+        "how",
+    ]
 
     ret: bool = False
     for word in indicators:
@@ -29,13 +38,15 @@ def is_question(question: str) -> bool:
     return ret
 
 
-def main():
+def main() -> int:
     intents = discord.Intents.default()
     intents.message_content = True
     client = TestClient(intents=intents)
     client.run(os.environ["DISCORD_TOKEN"])
 
     guid_name = client.guild
+
+    return 0
 
 
 if __name__ == "__main__":
