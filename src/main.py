@@ -38,11 +38,20 @@ def is_question(question: str) -> bool:
     return ret
 
 
+def get_env(name: str) -> str:
+    VALUE: str = os.environ.get(name)
+
+    if VALUE is None:
+        raise ValueError(f"Environment variable '{name}' is not set.")
+
+    return VALUE
+
+
 def main() -> int:
     intents = discord.Intents.default()
     intents.message_content = True
     client = TestClient(intents=intents)
-    client.run(os.environ["DISCORD_TOKEN"])
+    client.run(get_env("DISCORD_TOKEN"))
 
     guid_name = client.guild
 
