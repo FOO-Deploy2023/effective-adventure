@@ -6,6 +6,9 @@ __pycache__/
 # python virtual environments
 venv/
 
+# environment variables
+env
+
 # Emacs temp files
 \#*\#
 *~
