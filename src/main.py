@@ -2,6 +2,8 @@ import os
 import sys
 import discord
 
+from typing import List
+
 
 class TestClient(discord.Client):
     async def on_ready(self):
@@ -13,6 +15,18 @@ class TestClient(discord.Client):
 
         if message.content == "ping":
             await message.channel.send("pong")
+
+
+def is_question(question: str) -> bool:
+    indicators: List[str] = ["?", "why", "what", "who", "whose", "which",
+                             "when", "where", "how"]
+
+    ret: bool = False
+    for word in indicators:
+        if word in question.lower():
+            return True
+
+    return ret
 
 
 def main():
