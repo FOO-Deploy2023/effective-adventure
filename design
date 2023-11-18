@@ -1,7 +1,6 @@
 MVP:
 	detect exact sentences and reply to them
 
-
 basic loop:
 	on message event
 		split into tokens
