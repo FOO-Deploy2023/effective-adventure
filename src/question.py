@@ -28,8 +28,8 @@ def is_question(question: str) -> bool:
         ret = True
     else:
         for segment in parse(question.lower()):
-            for word in indicators:
-                if segment.split()[0] == word:
-                    ret = True
+            if any(word == segment.split()[0] for word in indicators):
+                ret = True
+                break
 
     return ret
