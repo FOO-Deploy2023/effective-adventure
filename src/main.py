@@ -33,7 +33,7 @@ def is_question(question: str) -> bool:
     ret: bool = False
     for word in indicators:
         if word in question.lower():
-            return True
+            ret = True
 
     return ret
 
