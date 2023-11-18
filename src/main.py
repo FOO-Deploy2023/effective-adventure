@@ -2,7 +2,7 @@ import os
 import sys
 import discord
 
-from typing import List
+from question import is_question
 
 
 class TestClient(discord.Client):
@@ -15,27 +15,6 @@ class TestClient(discord.Client):
 
         if message.content == "ping":
             await message.channel.send("pong")
-
-
-def is_question(question: str) -> bool:
-    indicators: List[str] = [
-        "?",
-        "why",
-        "what",
-        "who",
-        "whose",
-        "which",
-        "when",
-        "where",
-        "how",
-    ]
-
-    ret: bool = False
-    for word in indicators:
-        if word in question.lower():
-            ret = True
-
-    return ret
 
 
 def get_env(name: str) -> str:
