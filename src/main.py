@@ -3,6 +3,9 @@ import sys
 import discord
 
 from typing import List
+from tinydb import TinyDB, Query
+
+db = TinyDB("testdb.json")
 
 
 class TestClient(discord.Client):
@@ -13,8 +16,11 @@ class TestClient(discord.Client):
         if message.author == self.user:
             return
 
-        if message.content == "ping":
-            await message.channel.send("pong")
+        # if message.content == "ping":
+        cont = message.content
+        match cont:
+            case "ping":
+                await message.channel.send("pong")
 
 
 def is_question(question: str) -> bool:
