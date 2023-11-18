@@ -4,6 +4,10 @@ import discord
 
 from question import is_question
 
+from index import extract, print_dict
+from collections import defaultdict
+from sortedcontainers import SortedDict
+
 
 class TestClient(discord.Client):
     async def on_ready(self):
@@ -33,6 +37,12 @@ def main() -> int:
     client.run(get_env("DISCORD_TOKEN"))
 
     guid_name = client.guild
+
+    # Testing the index
+    # table = defaultdict(SortedDict)
+    # extract("why is phil so cool?", table)
+    # extract("who lives in a pineapple under the sea?", table)
+    # print_dict(table)
 
     return 0
 
