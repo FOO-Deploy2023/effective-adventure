@@ -21,6 +21,8 @@ def main():
     client = TestClient(intents=intents)
     client.run(os.environ["DISCORD_TOKEN"])
 
+    guid_name = client.guild
+
 
 if __name__ == "__main__":
     sys.exit(main())
