@@ -3,6 +3,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# python virtual environments
+venv/
+
+# environment variables
+env
+
 # Emacs temp files
 \#*\#
 *~
