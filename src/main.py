@@ -2,6 +2,10 @@ import os
 import sys
 import discord
 
+from tinydb import TinyDB, Query
+
+db = TinyDB("testdb.json")
+
 
 class TestClient(discord.Client):
     async def on_ready(self):
@@ -11,8 +15,11 @@ class TestClient(discord.Client):
         if message.author == self.user:
             return
 
-        if message.content == "ping":
-            await message.channel.send("pong")
+        # if message.content == "ping":
+        cont = message.content
+        match cont:
+            case "ping":
+                await message.channel.send("pong")
 
 
 def main():
