@@ -1,0 +1,22 @@
+MVP:
+	detect exact sentences and reply to them
+
+
+basic loop:
+	on message event
+		split into tokens
+		clean input (remove links, usernames, etc)
+	parser
+		categorize tokens, such as questing type (5 w's), and key nouns?
+		some sort of hash?
+	database
+		map of hashes to messages, metadata
+
+hash fn:
+
+
+creating database:
+	manual:
+		add an entry, requires at least 5 words???
+
+	automatic:
