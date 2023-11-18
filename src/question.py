@@ -21,6 +21,14 @@ def is_question(question: str) -> bool:
         "when",
         "where",
         "how",
+        "do",
+        "does",
+        "did",
+        "are",
+        "is",
+        "could",
+        "would",
+        "will",
     ]
 
     ret: bool = False
