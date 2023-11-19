@@ -1,5 +1,6 @@
 from discord import app_commands
 from discord.ext import commands
+import discord.ui as ui
 import discord
 
 import db
@@ -63,12 +64,18 @@ async def on_question(message):
                     reply = await message.channel.fetch_message(id)
                     replies.append(reply.content)
 
-            full = "FAQ detected, here are some common answers: \n"
+            # await message.reply(full)
+            embed = discord.Embed(title = "FAQ detected!")
+            embed.set_thumbnail(url=bot.user.display_avatar)
+
+            embed.add_field(name = "Detected topics", value = ', '.join([k for k, _ in kw]), inline = False)
+
+            full = ""
             for i in range(len(replies)):
                 full += f"{i+1}: {replies[i]}\n"
-                
-            await message.reply(full)
-                        
+            embed.add_field(name = "Common answers", value = full, inline = False)
+            await message.reply(embed = embed)
+
         except:
             pass
     
