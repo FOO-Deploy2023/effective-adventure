@@ -4,6 +4,8 @@ import discord
 
 from question import is_question
 
+from db import insert, search
+
 from index import extract, print_dict
 from collections import defaultdict
 
