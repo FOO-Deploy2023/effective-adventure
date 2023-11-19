@@ -1,13 +1,22 @@
 import yake
 
-from db import insert, search
+from db import store
 
-def extract(msg: str):
-    numOfKeywords = 3
-    kw_extractor = yake.KeywordExtractor(top=numOfKeywords)
+def extract(msg: str, table):
+    kw_extractor = yake.KeywordExtractor()
     keywords = kw_extractor.extract_keywords(msg)
-    return keywords
 
+    print(msg)
+    for kw in keywords:
+        keyphrase, score = kw
+
+        inner_table = table[keyphrase]
+        inner_table[msg] = score
+
+        print(kw)
+
+    store(table) # store data using pickle
+    return table
 
 def print_dict(table):
     # Printing the entire table in a useful view
