@@ -1,5 +1,5 @@
 # db
-db.json
+data.pkl
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -16,3 +16,6 @@ env
 \#*\#
 *~
 .#*
+
+# Helix config
+.helix/
