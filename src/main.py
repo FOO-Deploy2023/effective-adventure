@@ -38,11 +38,11 @@ async def on_message(message):
             await message.channel.send("pong")
 
 
-@bot.tree.command(name="hello")
+@bot.tree.command(name="hello", description="Say hello to the bot!")
 async def hello(interaction: discord.Interaction):
     await interaction.response.send_message("hello world!")
 
-@bot.tree.command(name='show_embed', description="Show an embed")
+@bot.tree.command(name='questions', description="Find the most common questions in the server and its answers!")
 async def embed(ctx):
    
     bot_user = bot.user
