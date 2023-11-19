@@ -25,7 +25,6 @@ def main() -> int:
     client = Viper(intents=intents)
     client.run(get_env("DISCORD_TOKEN"))
 
-    guid_name = client.guild
 
     # Testing the index
     # table = defaultdict(SortedDict)
