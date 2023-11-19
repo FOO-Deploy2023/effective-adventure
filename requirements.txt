@@ -1,2 +1,4 @@
 discord.py
 tinydb
+git+https://github.com/LIAAD/yake
+sortedcontainers
