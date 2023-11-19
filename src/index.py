@@ -1,5 +1,5 @@
 import yake
-
+from db import insert, search
 
 def extract(msg: str, table):
     kw_extractor = yake.KeywordExtractor()
@@ -14,6 +14,7 @@ def extract(msg: str, table):
 
         print(kw)
 
+    return table
 
 def print_dict(table):
     # Printing the entire table in a useful view
