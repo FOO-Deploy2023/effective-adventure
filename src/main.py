@@ -9,7 +9,7 @@ from question import is_question
 
 from db import insert, search
 
-from index import extract, print_dict
+from index import build, print_dict
 from collections import defaultdict
 
 
@@ -61,12 +61,12 @@ def main() -> int:
    # guid_name = client.guild
 
     # Testing the index
-    # table = defaultdict(dict)
-    # table = extract("phil lives in a pineapple", table)
-    # table = extract("phil is SO COOL!", table)
-    # table = extract("phil is actually a pineapple, just like that other phil right there", table)
-    # print_dict(table)
-    bot.run(get_env("DISCORD_TOKEN"))
+    table = defaultdict(dict)
+    table = build("phil lives in a pineapple", table)
+    table = build("phil is SO COOL!", table)
+    table = build("phil is actually a pineapple, just like that other phil right there", table)
+    print_dict(table)
+    # bot.run(get_env("DISCORD_TOKEN"))
 
     return 0
 
