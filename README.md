@@ -1,6 +1,7 @@
 # viper
 
-A Discord bot that references answers from past conversations.
+Viper is a Discord bot designed to reference answers from past conversations,
+streamlining user interactions and improving the overall chat experience.
 
 # Screenshots
 
