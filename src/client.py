@@ -2,7 +2,7 @@ from discord import app_commands
 from discord.ext import commands
 import discord
 
-# import db
+import db
 from index import extract
 import question
 
@@ -13,7 +13,10 @@ bot = commands.Bot(command_prefix='/',intents=intents)
 
 # module globals
 unanswered = []
-db = {}
+try:
+    db_cache = db.restore()
+except:
+    db_cache = {}
 
 @bot.tree.command(name="hello")
 async def hello(interaction: discord.Interaction):
@@ -35,6 +38,7 @@ async def on_message(message):
     elif message.reference.message_id:
         await on_answer(message)
 
+    print(db_cache)
     return
 
 
@@ -44,34 +48,33 @@ async def on_question(message):
 
     answers = []
     for k, _ in kw:
-        a = db.get(k)
+        a = db_cache.get(k)
         if a:
             answers.append(a)
 
     if not answers:
         unanswered.append(message.id)
-        print("could not find answer, waiting for reply...", message.id)
     else:
         try:
             for a in answers:
-                reply = await message.channel.fetch_message(a)
-                await message.reply(reply.content)
+                for id in a:
+                    reply = await message.channel.fetch_message(id)
+                    await message.reply(reply.content)
         except:
             pass
     
 
 async def on_answer(message):
-    if message.reference.message_id not in unanswered:
-        return
-
-    print("got a reply", message.reference.message_id)
     q = await message.channel.fetch_message(message.reference.message_id)
     kw = extract(q.content)
-    print("keywords: ", kw)
     for k, _ in kw:
-        db[k] = message.id
+        if k in db_cache.keys():
+            db_cache[k].append(message.id)
+        elif message.reference.message_id in unanswered:
+            db_cache[k] = [message.id]
+            unanswered.remove(message.reference.message_id)
 
-    unanswered.remove(message.reference.message_id)
+    db.store(db_cache)
 
 
 @bot.event
