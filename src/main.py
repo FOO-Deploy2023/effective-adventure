@@ -2,10 +2,11 @@ import os
 import sys
 import discord
 
-from typing import List
-from tinydb import TinyDB, Query
+from question import is_question
 
-db = TinyDB("testdb.json")
+from index import extract, print_dict
+from collections import defaultdict
+from sortedcontainers import SortedDict
 
 
 class TestClient(discord.Client):
@@ -21,27 +22,6 @@ class TestClient(discord.Client):
         match cont:
             case "ping":
                 await message.channel.send("pong")
-
-
-def is_question(question: str) -> bool:
-    indicators: List[str] = [
-        "?",
-        "why",
-        "what",
-        "who",
-        "whose",
-        "which",
-        "when",
-        "where",
-        "how",
-    ]
-
-    ret: bool = False
-    for word in indicators:
-        if word in question.lower():
-            ret = True
-
-    return ret
 
 
 def get_env(name: str) -> str:
@@ -60,6 +40,12 @@ def main() -> int:
     client.run(get_env("DISCORD_TOKEN"))
 
     guid_name = client.guild
+
+    # Testing the index
+    # table = defaultdict(SortedDict)
+    # extract("why is phil so cool?", table)
+    # extract("who lives in a pineapple under the sea?", table)
+    # print_dict(table)
 
     return 0
 
