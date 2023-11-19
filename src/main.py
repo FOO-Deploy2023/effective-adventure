@@ -21,7 +21,7 @@ bot = commands.Bot(command_prefix='/',intents=intents)
 
 @bot.event
 async def on_ready():
-    print("Logged on as {bot.user.name}")
+    print(f"Logged on as {bot.user.name}")
     try:
         synced = await bot.tree.sync()
         print(f"Synced {len(synced)} commands(s)")
@@ -41,6 +41,23 @@ async def on_message(message):
 @bot.tree.command(name="hello")
 async def hello(interaction: discord.Interaction):
     await interaction.response.send_message("hello world!")
+
+@bot.tree.command(name='show_embed', description="Show an embed")
+async def embed(ctx):
+   
+    bot_user = bot.user
+
+    pfp = bot_user.display_avatar
+
+    embed = discord.Embed(title="Most Common Questions", description="This bot will display the most common questions", colour=discord.Colour.blue())
+    
+    embed.set_thumbnail(url=f"{pfp}")
+
+    embed.add_field(name="Where is phil?", value="Phil is over here!", inline = False)
+    embed.add_field(name="Whom is phil?", value="Phil is gdb god!", inline = False)
+    embed.add_field(name="What is phil?", value="Also the gdb god", inline = False)
+
+    await ctx.response.send_message(embed=embed)
 
 
 def get_env(name: str) -> str:
