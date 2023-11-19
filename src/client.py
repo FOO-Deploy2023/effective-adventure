@@ -10,7 +10,7 @@ import question
 # Create an instance of the Bot class with '/' as the command prefix
 intents = discord.Intents.default()
 intents.message_content = True
-bot = commands.Bot(command_prefix='/',intents=intents)
+bot = commands.Bot(command_prefix="/", intents=intents)
 
 # module globals
 unanswered = []
@@ -23,7 +23,7 @@ except:
 @bot.tree.command(name="hello")
 async def hello(interaction: discord.Interaction):
     await interaction.response.send_message("hello world!")
-    
+
 
 @bot.event
 async def on_message(message):
@@ -35,7 +35,7 @@ async def on_message(message):
             await message.channel.send("pong")
         case _:
             pass
-    
+
     if question.is_question(message.content):
         await on_question(message)
     elif message.reference.message_id is not None:
@@ -65,20 +65,24 @@ async def on_question(message):
                     replies.append(reply.content)
 
             # await message.reply(full)
-            embed = discord.Embed(title = "FAQ detected!")
+            embed = discord.Embed(title="FAQ detected!")
             embed.set_thumbnail(url=bot.user.display_avatar)
 
-            embed.add_field(name = "Detected topics", value = ', '.join([k for k, _ in kw]), inline = False)
+            embed.add_field(
+                name="Detected topics",
+                value=", ".join([k for k, _ in kw]),
+                inline=False,
+            )
 
             full = ""
             for i in range(len(replies)):
                 full += f"{i+1}: {replies[i]}\n"
-            embed.add_field(name = "Common answers", value = full, inline = False)
-            await message.reply(embed = embed)
+            embed.add_field(name="Common answers", value=full, inline=False)
+            await message.reply(embed=embed)
 
         except:
             pass
-    
+
 
 async def on_answer(message):
     q = await message.channel.fetch_message(message.reference.message_id)
