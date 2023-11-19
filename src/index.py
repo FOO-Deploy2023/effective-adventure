@@ -2,21 +2,11 @@ import yake
 
 from db import store
 
-def extract(msg: str, table):
-    kw_extractor = yake.KeywordExtractor()
+def extract(msg: str):
+    kw_extractor = yake.KeywordExtractor(top=3)
     keywords = kw_extractor.extract_keywords(msg)
 
-    print(msg)
-    for kw in keywords:
-        keyphrase, score = kw
-
-        inner_table = table[keyphrase]
-        inner_table[msg] = score
-
-        print(kw)
-
-    store(table) # store data using pickle
-    return table
+    return keywords
 
 def print_dict(table):
     # Printing the entire table in a useful view
@@ -29,4 +19,3 @@ def print_dict(table):
 
         for message, score in sorted_treemap:
             print(f"  Score: {score}, Message: '{message}'")
-
