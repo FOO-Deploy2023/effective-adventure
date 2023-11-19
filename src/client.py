@@ -1,5 +1,7 @@
 import discord
 
+import db
+from index import extract
 import question
 
 class Viper(discord.Client):
@@ -12,8 +14,6 @@ class Viper(discord.Client):
         if message.author == self.user:
             return
 
-        # if message.content == "ping":
-        # msg = message.content
         match message.content:
             case "ping":
                 await message.channel.send("pong")
