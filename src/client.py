@@ -18,10 +18,12 @@ try:
 except:
     db_cache = {}
 
+
 @bot.tree.command(name="hello")
 async def hello(interaction: discord.Interaction):
     await interaction.response.send_message("hello world!")
     
+
 @bot.event
 async def on_message(message):
     if message.author == bot.user:
@@ -35,10 +37,9 @@ async def on_message(message):
     
     if question.is_question(message.content):
         await on_question(message)
-    elif message.reference.message_id:
+    elif message.reference.message_id is not None:
         await on_answer(message)
 
-    print(db_cache)
     return
 
 
@@ -56,10 +57,18 @@ async def on_question(message):
         unanswered.append(message.id)
     else:
         try:
+            replies = []
             for a in answers:
                 for id in a:
                     reply = await message.channel.fetch_message(id)
-                    await message.reply(reply.content)
+                    replies.append(reply.content)
+
+            full = "FAQ detected, here are some common answers: \n"
+            for i in range(len(replies)):
+                full += f"{i+1}: {replies[i]}\n"
+                
+            await message.reply(full)
+                        
         except:
             pass
     
