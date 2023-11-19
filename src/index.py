@@ -1,32 +1,39 @@
 import yake
 
+from collections import defaultdict
 from db import insert, search
 
 def extract(msg: str):
     kw_extractor = yake.KeywordExtractor()
-    keywords = kw_extractor.extract_keywords(msg)
+    return kw_extractor.extract_keywords(msg)
 
-    print(msg)
-    table = defaultdict(dict)
+
+def build(msg: str, table):
+    keywords = extract(msg)
+
     for kw in keywords:
-        keyphrase, score = kw
-
-        inner_table = table[keyphrase]
-        inner_table[msg] = score
-
         print(kw)
+        keyphrase = kw[0]
 
+        if keyphrase not in table:
+            table[keyphrase] = set()
+
+        table[keyphrase].add(msg)
+
+    print()
     return table
 
+
+# def answer(msg: str, table):
+#     answers = defaultdict(dict)
+#     keywords = extract(msg)
+
+
 def print_dict(table):
-    # Printing the entire table in a useful view
-    print("\nComplete Table View:")
-    for keyphrase, treemap in table.items():
-        print(f"Keyphrase: '{keyphrase}'")
+    for keyphrase, messages in table.items():
+        print(f"Keyword: '{keyphrase}'")
+        for msg in messages:
+            print(f"  - {msg}")
+        print()  # Adds an empty line for better readability
 
-        # Sorting the treemap based on scores (values) in descending order
-        sorted_treemap = sorted(treemap.items(), key=lambda item: item[1])
-
-        for message, score in sorted_treemap:
-            print(f"  Score: {score}, Message: '{message}'")
 
