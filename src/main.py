@@ -1,6 +1,9 @@
 import os
 import sys
+
 import discord
+from discord.ext import commands
+from discord import app_commands
 
 from question import is_question
 
@@ -10,16 +13,34 @@ from index import extract, print_dict
 from collections import defaultdict
 
 
-class TestClient(discord.Client):
-    async def on_ready(self):
-        print("Logged on as", self.user)
+# Create an instance of the Bot class with '/' as the command prefix
+intents = discord.Intents.default()
+intents.message_content = True
+bot = commands.Bot(command_prefix='/',intents=intents)
 
-    async def on_message(self, message):
-        if message.author == self.user:
+
+@bot.event
+async def on_ready():
+    print("Logged on as {bot.user.name}")
+    try:
+        synced = await bot.tree.sync()
+        print(f"Synced {len(synced)} commands(s)")
+    except Exception as e:
+        print(e)
+
+
+@bot.event
+async def on_message(message):
+        if message.author == bot.user:
             return
 
         if message.content == "ping":
             await message.channel.send("pong")
+
+
+@bot.tree.command(name="hello")
+async def hello(interaction: discord.Interaction):
+    await interaction.response.send_message("hello world!")
 
 
 def get_env(name: str) -> str:
@@ -32,12 +53,12 @@ def get_env(name: str) -> str:
 
 
 def main() -> int:
-    intents = discord.Intents.default()
-    intents.message_content = True
-    client = TestClient(intents=intents)
-    client.run(get_env("DISCORD_TOKEN"))
+    #intents = discord.Intents.default()
+    #intents.message_content = True
+    #client = TestClient(intents=intents)
+    #client.run(get_env("DISCORD_TOKEN"))
 
-    guid_name = client.guild
+   # guid_name = client.guild
 
     # Testing the index
     # table = defaultdict(dict)
@@ -45,6 +66,7 @@ def main() -> int:
     # extract("phil is SO COOL!", table)
     # extract("phil is actually a pineapple, just like that other phil right there", table)
     # print_dict(table)
+    bot.run(get_env("DISCORD_TOKEN"))
 
     return 0
 
