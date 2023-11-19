@@ -21,6 +21,7 @@ bot = commands.Bot(command_prefix='/',intents=intents)
 
 @bot.event
 async def on_ready():
+    await bot.change_presence(status = discord.Status.dnd, activity=discord.Game("zzzzzzzzzzzzzzzzzzzzzzzzz"))
     print(f"Logged on as {bot.user.name}")
     try:
         synced = await bot.tree.sync()
@@ -42,7 +43,7 @@ async def on_message(message):
 async def hello(interaction: discord.Interaction):
     await interaction.response.send_message("hello world!")
 
-@bot.tree.command(name='questions', description="Find the most common questions in the server and its answers!")
+@bot.tree.command(name='viπer_questions', description="Find the most common questions in the server and its answers!")
 async def embed(ctx):
    
     bot_user = bot.user
