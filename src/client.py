@@ -18,8 +18,8 @@ async def hello(interaction: discord.Interaction):
 asked = []
 db = {}
 @bot.event
-async def on_message(self, message):
-    if message.author == self.user:
+async def on_message(message):
+    if message.author == bot.user:
         return
 
     match message.content:
@@ -38,12 +38,12 @@ async def on_message(self, message):
 
         answers = []
         for k, _ in kw:
-            a = self.db.get(k)
+            a = db.get(k)
             if a:
                 answers.append(a)
 
         if not answers:
-            self.asked.append(message.id)
+            asked.append(message.id)
             print("could not find answer, waiting for reply...", message.id)
         else:
             try:
@@ -58,24 +58,24 @@ async def on_message(self, message):
         except:
             print("not a reply")
         else:
-            if message.reference.message_id in self.asked:
+            if message.reference.message_id in asked:
                 print("got a reply", message.reference.message_id)
                 q = await message.channel.fetch_message(message.reference.message_id)
                 kw = extract(q.content)
                 print("keywords: ", kw)
                 for k, _ in kw:
-                    self.db[k] = message.id
+                    db[k] = message.id
 
-                self.asked.remove(message.reference.message_id)
+                asked.remove(message.reference.message_id)
 
-    print("DB: ", self.db)
+    print("DB: ", db)
         
     return
 
 
 @bot.event
 async def on_ready():
-    print("Logged on as {bot.user.name}")
+    print(f"Logged on as {bot.user.name}")
     try:
         synced = await bot.tree.sync()
         print(f"Synced {len(synced)} commands(s)")
