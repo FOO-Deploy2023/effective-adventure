@@ -7,11 +7,11 @@ from discord import app_commands
 
 from question import is_question
 
-from db import insert, search
-
 from index import build, print_dict
+
 from collections import defaultdict
 
+from db import *
 
 # Create an instance of the Bot class with '/' as the command prefix
 intents = discord.Intents.default()
@@ -58,7 +58,7 @@ def main() -> int:
     #client = TestClient(intents=intents)
     #client.run(get_env("DISCORD_TOKEN"))
 
-   # guid_name = client.guild
+    # guid_name = client.guild
 
     # Testing the index
     table = defaultdict(dict)

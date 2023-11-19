@@ -1,7 +1,8 @@
 import yake
 
 from collections import defaultdict
-from db import insert, search
+
+from db import store
 
 def extract(msg: str):
     kw_extractor = yake.KeywordExtractor()
@@ -35,5 +36,3 @@ def print_dict(table):
         for msg in messages:
             print(f"  - {msg}")
         print()  # Adds an empty line for better readability
-
-
