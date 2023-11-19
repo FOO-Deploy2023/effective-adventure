@@ -62,9 +62,9 @@ def main() -> int:
 
     # Testing the index
     # table = defaultdict(dict)
-    # extract("phil lives in a pineapple", table)
-    # extract("phil is SO COOL!", table)
-    # extract("phil is actually a pineapple, just like that other phil right there", table)
+    # table = extract("phil lives in a pineapple", table)
+    # table = extract("phil is SO COOL!", table)
+    # table = extract("phil is actually a pineapple, just like that other phil right there", table)
     # print_dict(table)
     bot.run(get_env("DISCORD_TOKEN"))
 
