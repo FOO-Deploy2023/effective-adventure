@@ -5,9 +5,10 @@ import discord
 from question import is_question
 from client import Viper
 
+from db import insert, search
+
 from index import extract, print_dict
 from collections import defaultdict
-from sortedcontainers import SortedDict
 
 
 def get_env(name: str) -> str:
@@ -27,9 +28,10 @@ def main() -> int:
 
 
     # Testing the index
-    # table = defaultdict(SortedDict)
-    # extract("why is phil so cool?", table)
-    # extract("who lives in a pineapple under the sea?", table)
+    # table = defaultdict(dict)
+    # extract("phil lives in a pineapple", table)
+    # extract("phil is SO COOL!", table)
+    # extract("phil is actually a pineapple, just like that other phil right there", table)
     # print_dict(table)
 
     return 0
