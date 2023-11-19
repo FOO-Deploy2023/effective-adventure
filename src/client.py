@@ -53,7 +53,7 @@ class Viper(discord.Client):
             else:
                 if message.reference.message_id in self.asked:
                     print("got a reply", message.reference.message_id)
-                    q = await message.channel.fetch_messasge(message.reference.message_id)
+                    q = await message.channel.fetch_message(message.reference.message_id)
                     kw = extract(q.content)
                     print("keywords: ", kw)
                     for k, _ in kw:
