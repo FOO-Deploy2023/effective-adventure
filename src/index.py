@@ -1,19 +1,23 @@
 import yake
 
+from db import insert, search
 
-def extract(msg: str, table):
-    kw_extractor = yake.KeywordExtractor()
+def extract(msg: str):
+    numOfKeywords = 3
+    kw_extractor = yake.KeywordExtractor(top=numOfKeywords)
     keywords = kw_extractor.extract_keywords(msg)
 
-    print(msg)
-    for kw in keywords:
-        keyphrase, score = kw
+    # print(msg)
+    # table = defaultdict(dict)
+    # for kw in keywords:
+    #     keyphrase, score = kw
 
-        inner_table = table[keyphrase]
-        inner_table[msg] = score
+    #     inner_table = table[keyphrase]
+    #     inner_table[msg] = score
 
-        print(kw)
+    #     print(kw)
 
+    return keywords
 
 def print_dict(table):
     # Printing the entire table in a useful view
