@@ -4,6 +4,8 @@ import discord
 
 from question import is_question
 
+from db import insert, search
+
 
 class TestClient(discord.Client):
     async def on_ready(self):
