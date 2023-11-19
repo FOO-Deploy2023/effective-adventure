@@ -1,20 +1,7 @@
 import os
 import sys
-import discord
 
-from question import is_question
-
-
-class TestClient(discord.Client):
-    async def on_ready(self):
-        print("Logged on as", self.user)
-
-    async def on_message(self, message):
-        if message.author == self.user:
-            return
-
-        if message.content == "ping":
-            await message.channel.send("pong")
+from client import bot
 
 
 def get_env(name: str) -> str:
@@ -27,12 +14,7 @@ def get_env(name: str) -> str:
 
 
 def main() -> int:
-    intents = discord.Intents.default()
-    intents.message_content = True
-    client = TestClient(intents=intents)
-    client.run(get_env("DISCORD_TOKEN"))
-
-    guid_name = client.guild
+    bot.run(get_env("DISCORD_TOKEN"))
 
     return 0
 
