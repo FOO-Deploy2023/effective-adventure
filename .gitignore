@@ -13,3 +13,6 @@ env
 \#*\#
 *~
 .#*
+
+# Helix config
+.helix/
