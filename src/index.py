@@ -1,5 +1,6 @@
 import yake
 
+
 def extract(msg: str, table):
     kw_extractor = yake.KeywordExtractor()
     keywords = kw_extractor.extract_keywords(msg)
