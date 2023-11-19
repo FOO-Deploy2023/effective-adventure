@@ -6,6 +6,9 @@ from question import is_question
 
 from db import insert, search
 
+from index import extract, print_dict
+from collections import defaultdict
+
 
 class TestClient(discord.Client):
     async def on_ready(self):
@@ -35,6 +38,13 @@ def main() -> int:
     client.run(get_env("DISCORD_TOKEN"))
 
     guid_name = client.guild
+
+    # Testing the index
+    # table = defaultdict(dict)
+    # extract("phil lives in a pineapple", table)
+    # extract("phil is SO COOL!", table)
+    # extract("phil is actually a pineapple, just like that other phil right there", table)
+    # print_dict(table)
 
     return 0
 
