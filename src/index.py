@@ -1,4 +1,5 @@
 import yake
+
 from db import insert, search
 
 def extract(msg: str, table):
