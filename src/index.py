@@ -2,11 +2,12 @@ import yake
 
 from db import insert, search
 
-def extract(msg: str, table):
+def extract(msg: str):
     kw_extractor = yake.KeywordExtractor()
     keywords = kw_extractor.extract_keywords(msg)
 
     print(msg)
+    table = defaultdict(dict)
     for kw in keywords:
         keyphrase, score = kw
 
